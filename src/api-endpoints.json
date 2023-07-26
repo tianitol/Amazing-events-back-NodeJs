@@ -1,0 +1,242 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "title": "Amazing events API docs",
+        "version": "0.0.1"
+    }, 
+    "paths": {
+        "/api/eventos": {
+            "get": {
+                "summary": "Get all events",
+                "responses": {
+                    "200": {
+                        "description": "All events have been obtained",
+                        "content":{
+                            "application/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "category":{
+                                            "type":"string",
+                                            "example": "familiar"
+                                        },
+                                        "description": {
+                                            "type":"string",
+                                            "example": "description"
+                                        }, 
+                                        "place": {
+                                            "type": "string",
+                                            "example": "place"
+                                        },
+                                        "price": {
+                                            "type": "number",
+                                            "price": 0
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server failure"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create an event and save into the database",
+                "parameters":[
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Evento"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Event has been created and save in the database"
+                    },
+                    "400":{
+                        "description": "The event was not created"
+                    },
+                    "404":{
+                        "description": "Data Error"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a parcial or complete event found by id, and save into the database",
+                "parameters":[
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EventoId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event has been updated"
+                    },
+                    "400":{
+                        "description": "The event was not updated"
+                    },
+                    "404":{
+                        "description": "Data Error: invalid parameters"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update a complete event found by id, and save into the database",
+                "parameters":[
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EventoId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event has been updated"
+                    },
+                    "400":{
+                        "description": "The event was not updated"
+                    },
+                    "404":{
+                        "description": "Data Error: invalid parameters"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a complete event found by id",
+                "parameters":[
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "_id": {
+                                    "type":"string",
+                                    "example":"64b5b57ba212dd5682b87518"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event has been deleted"
+                    },
+                    "400":{
+                        "description": "The event was not delete"
+                    },
+                    "404":{
+                        "description": "Data Error: ID is not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/eventos/{id}": {
+            "get": {
+                "summary": "Get once event by id",
+                "responses": {
+                    "200": {
+                        "description": "The event has been obtained",
+                        "content":{
+                            "application/json":{
+                                "schema": {
+                                    "$ref": "#/definitions/EventoId"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server failure"
+                    }
+                }
+            }
+
+        }
+    },
+    "definitions": {
+        "Evento": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "category":{
+                        "type":"string",
+                        "example": "familiar"
+                    },
+                    "description": {
+                        "type":"string",
+                        "example": "description"
+                    }, 
+                    "place": {
+                        "type": "string",
+                        "example": "place"
+                    },
+                    "price": {
+                        "type": "number",
+                        "price": 0
+                    }
+                }
+        },
+        "EventoId": {
+            "type": "object",
+                "properties": {
+                    "_id":{
+                        "type":"string",
+                        "example":"64b85f11c7ba476caddacb1d"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "category":{
+                        "type":"string",
+                        "example": "familiar"
+                    },
+                    "description": {
+                        "type":"string",
+                        "example": "description"
+                    }, 
+                    "place": {
+                        "type": "string",
+                        "example": "place"
+                    },
+                    "price": {
+                        "type": "number",
+                        "price": 0
+                    }
+                }
+        }
+    }
+}
