@@ -16,11 +16,19 @@ const {
   comprobarIdParams,
 } = require("../middlewares/validations");
 
+const { validaPermisoAdmin } = require("../middlewares/auth");
+
 const router = express.Router();
 
 router.get("/:id", comprobarIdParams, getUserById);
 router.get("/", getUsers);
-router.post("/", comprobarDatosUsuarios, comprobarUsuarioExistente, createUser);
+router.post(
+  "/",
+  validaPermisoAdmin,
+  comprobarDatosUsuarios,
+  comprobarUsuarioExistente,
+  createUser
+);
 router.delete("/", comprobarId, deleteUser);
 router.patch("/", comprobarId, updateUser);
 router.put(

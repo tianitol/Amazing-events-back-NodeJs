@@ -13,6 +13,7 @@ async function login(req, res) {
         let objUser = {
           id: usuario._id,
           username: usuario.username,
+          rol: usuario.rol,
           email: usuario.email,
         };
 
